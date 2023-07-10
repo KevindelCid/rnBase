@@ -15,17 +15,20 @@ import {
   REGISTER,
 } from 'redux-persist'
 import counterSlice from './slices/counterSlice'
+import  authSlice  from './slices/authSlice'
+
 
 
 
 const reducers = combineReducers({
     counter: counterSlice,
+    auth: authSlice,
 })
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['questions'],
+  whitelist: ['auth'],
   debug: true,
 }
 
@@ -49,3 +52,5 @@ const persistor = persistStore(store)
 setupListeners(store.dispatch)
 
 export { store, persistor }
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>

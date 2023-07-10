@@ -6,18 +6,13 @@ import {AppRegistry} from 'react-native';
 import App from './src/App';
 import {name as appName} from './app.json';
 
-import { Provider } from 'react-redux'
-import { store } from './src/Store';
-
-
+import {Provider} from 'react-redux';
+import {store} from './src/Store';
 
 const AppInitPoint = () => (
-    
-          <Provider store={store}>
-            <App /> 
-          </Provider>
-
-  );
-
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 
 AppRegistry.registerComponent(appName, () => AppInitPoint);
