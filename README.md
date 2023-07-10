@@ -35,11 +35,6 @@ or
 npm run gen:types
 ```
 
+- aclaration: in this example im using posts table in supabase with content column. 
 
-
-
-
-
-
-
-- generate your access token in supabase
+- you should configure in supabase dashboard yours policies to authenticated users https://supabase.com/dashboard/project/{yourIdProject}/auth/policies
