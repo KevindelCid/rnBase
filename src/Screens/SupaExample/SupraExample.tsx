@@ -32,8 +32,8 @@ export const SupraExample: React.FC = () => {
 
     return (
         <SimpleContainer>
-            <View style={{ gap: 15 }}>
-                <Text style={{ color: "red" }}> Create a post </Text>
+            <View className='' >
+                <Text className='text-slate-900'> Create a post </Text>
                 <TextInput value={content} onChangeText={setContent} style={{ borderColor: "black", borderWidth: 1, paddingHorizontal: 10, color: "black" }} placeholder="post..." placeholderTextColor={"gray"} />
                 <Button title={"Create a post"} onPress={() => {
 
