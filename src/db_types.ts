@@ -9,33 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      countries: {
-        Row: {
-          continent: Database["public"]["Enums"]["continents"] | null
-          id: number
-          iso2: string
-          iso3: string | null
-          local_name: string | null
-          name: string | null
-        }
-        Insert: {
-          continent?: Database["public"]["Enums"]["continents"] | null
-          id?: number
-          iso2: string
-          iso3?: string | null
-          local_name?: string | null
-          name?: string | null
-        }
-        Update: {
-          continent?: Database["public"]["Enums"]["continents"] | null
-          id?: number
-          iso2?: string
-          iso3?: string | null
-          local_name?: string | null
-          name?: string | null
-        }
-        Relationships: []
-      }
       posts: {
         Row: {
           content: string | null
@@ -62,14 +35,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      continents:
-        | "Africa"
-        | "Antarctica"
-        | "Asia"
-        | "Europe"
-        | "Oceania"
-        | "North America"
-        | "South America"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never

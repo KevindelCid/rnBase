@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button } from 'react-native'
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-
+import { PropsHandleSignUp, login, signUp } from '../../utils'
 import type {
     SignInWithPasswordCredentials,
     SignUpWithPasswordCredentials,
@@ -11,61 +11,23 @@ import { supabase } from '../../utils/supabase'
 import { setAuthentication } from '../../Store/slices/authSlice'
 import { useDispatch } from 'react-redux'
 import { SimpleContainer } from '../../Components/Layout'
+import { PropsCredentialsSignUp } from '../../interfaces'
+import { handleLogin, handleSignUp } from './handlers'
+import { BaseAuthButton } from '../../Components/UI/BaseAuthButton'
+import { BaseButton } from '../../Components/UI'
 
 
-interface AuthFormProps {
-    onSignUp: (credentials: SignUpWithPasswordCredentials) => void
-    onLogin: (credentials: SignInWithPasswordCredentials) => void
-    loading: boolean
-}
 
 
 
 export const Login = () => {
 
-    const dispatch = useDispatch()
-
+ 
     const [mode, setMode] = useState<'login' | 'signUp'>('login')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    // const [loading, setLoading] = useState(false)
-   
-
-    const handleSignUp = async (credentials: SignUpWithPasswordCredentials) => {
-
-        if(!('email' in credentials)) return
-        setLoading(true)
-        const { email, password } = credentials
-        const { error, data } = await supabase.auth.signUp({email, password})
-
-        if(error) 
-        console.log("🚀 ~ file: Login.tsx:52 ~ handleSignUp ~ error:", error)
-        
-        setLoading(false)
-
-    }
-
-
-    const handleLogin = async (credentials: SignUpWithPasswordCredentials) => {
-        if(!('email' in credentials)) return
-        setLoading(true)
-        const { email, password } = credentials
-        const { error, data } = await supabase.auth.signInWithPassword({email, password})
-
-        if(error) 
-        console.log("🚀 ~ file: Login.tsx:52 ~ handleSignUp ~ error:", error)
-        else {
-            // dispatch(setAuthentication(true))
-            // navigation.navigate("SupraExample")
-        }
-        setLoading(false)
-    }
-
-
-
-
 
 
     return (
@@ -90,10 +52,10 @@ export const Login = () => {
 
 
             {loading ? <ActivityIndicator size="large" color="#0000ff" />
-                : <>
-                    <Button title="Login" onPress={()=>handleLogin({  email, password})} />
-                    <Button title="Create account" onPress={()=>handleSignUp({ email, password })} />
-                </>
+                : <View className="my-4" style={{ gap: 4 }}>
+                    <BaseButton title="Login" onPress={() => handleLogin({ credentials: { email, password }, setLoading, supabase })} />
+                    <BaseButton title="Create account" onPress={() => handleSignUp({ credentials: { email, password }, setLoading, supabase })} />
+                </View>
             }
 
 
