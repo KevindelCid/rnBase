@@ -5,10 +5,12 @@ import { supabase } from '../../utils/supabase';
 import { Posts, getAllPosts } from '../../utils/api';
 import { Logout } from '../Auth';
 import { SimpleContainer } from '../../Components/Layout';
+import { BLTitleText, BText, BTextInput, BView, BXLTitleText } from '../../Components/Styles';
+import { BaseButton } from '../../Components/UI';
 
 export const handleSubmit = async (content: string, posts: any[] | null, setPosts: any) => {
 
-   
+
     const { data, error } = await supabase.from('posts').insert({ content }).select()
     if (error)
         console.log("🚀 ~ file: SupraExample.tsx:11 ~ handleSubmit ~ error:", error)
@@ -25,36 +27,47 @@ export const SupraExample: React.FC = () => {
     const [content, setContent] = useState<string>("")
     useEffect(() => {
 
-        getAllPosts().then(data=> setPosts(data));
+        getAllPosts().then(data => setPosts(data));
     }, []);
 
-   
+
 
     return (
-        <SimpleContainer>
-            <View className='' >
-                <Text className='text-slate-900'> Create a post </Text>
-                <TextInput value={content} onChangeText={setContent} style={{ borderColor: "black", borderWidth: 1, paddingHorizontal: 10, color: "black" }} placeholder="post..." placeholderTextColor={"gray"} />
-                <Button title={"Create a post"} onPress={() => {
+        <>
 
-                    handleSubmit(content, posts, setPosts)
+            <SimpleContainer>
+                <View className='' >
+                    <BXLTitleText>Create a post</BXLTitleText>
+                    <BTextInput
+                        label={"Post"}
+                        value={content}
+                        placeholder='Your post...'
+                        onChangeText={setContent} />
+                    <BaseButton title={"Create a post"} onPress={() => {
+
+                        handleSubmit(content, posts, setPosts)
 
 
-                    setContent("")
-                }} />
-            </View>
+                        setContent("")
+                    }} />
+                </View>
 
-                <Logout/>
 
-      
-            <View>
-                <Text style={{ color: "red" }}>Hello! here you can see all posts</Text>
-                {posts && posts.map((post) => (
-                    <Text style={{ color: "red" }} key={post.id}>{post.content}</Text>
-                ))}
 
-            </View>
-      
-        </SimpleContainer>
+
+                <View>
+                    <BLTitleText className={"pb-4"}>Hello! here you can see all posts</BLTitleText>
+                    {posts && posts.map((post) => (
+                        <BText key={post.id}>{post.content}</BText>
+                    ))}
+
+                </View>
+
+
+            </SimpleContainer>
+            <BView className={"absolute bottom-1 right-0 left-0 flex-1"}>
+                <Logout className={""} />
+            </BView>
+        </>
     );
 }

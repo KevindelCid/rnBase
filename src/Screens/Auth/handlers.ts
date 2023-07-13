@@ -1,16 +1,18 @@
-import { PropsCredentialsSignUp } from "../../interfaces"
+import { PropsCredentialsLogin, PropsCredentialsSignUp } from "../../interfaces"
 import { login, signUp } from "../../utils"
 
 
-export const handleSignUp = ({ credentials, setLoading, supabase }: PropsCredentialsSignUp) => {
+export const handleSignUp = async ({ credentials, setLoading, supabase, setEmailConfirmation, setError }: PropsCredentialsSignUp) => {
     setLoading(true)
-    signUp({ credentials, supabase })
+    const signUpResponse = await signUp({ credentials, supabase, setEmailConfirmation, setError })
     setLoading(false)
+    return signUpResponse
 }
 
-export const handleLogin = async ({ credentials, setLoading, supabase }: PropsCredentialsSignUp) => {
+export const handleLogin = async ({ credentials, setLoading, supabase }: PropsCredentialsLogin) => {
     setLoading(true)
-    login({credentials, supabase})
+    const loginResponse = await login({credentials, supabase })
     setLoading(false)
+    return loginResponse
 }
 

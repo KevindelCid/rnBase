@@ -24,6 +24,7 @@ export function MyStack(){
   
 
   return (
+    
     <Stack.Navigator 
     initialRouteName={userInfo.session ? "SupraExample": "Login" } 
     screenOptions={{

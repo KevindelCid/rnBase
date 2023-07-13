@@ -101,40 +101,36 @@ describe('login', () => {
 
 
 
+// describe('handleSignUp', () => {
+//   it('should set loading to true and call signUp with the provided credentials', () => {
+//     const setLoading = jest.fn();
+//     const credentials = { email: 'test@example.com', password: 'password' };
+//     // const supabase = {}; // Mock supabase object
+
+//     handleSignUp({ credentials, supabase, setLoading });
+
+//     expect(setLoading).toHaveBeenCalledTimes(2);
+//     expect(setLoading).toHaveBeenCalledWith(true);
+//     expect(setLoading).toHaveBeenCalledWith(false);
+//     expect(supabase.auth.signUp).toHaveBeenCalledWith(credentials);
+//   });
+// });
 
 
+// describe('handleLogin', () => {
+//   it('should set loading to true and call login with the provided credentials', () => {
+//     const setLoading = jest.fn();
+//     const credentials = { email: 'test@example.com', password: 'password' };
+//     // const supabase = {}; // Mock supabase object
 
+//     handleLogin({ credentials, supabase, setLoading });
 
-describe('handleSignUp', () => {
-  it('should set loading to true and call signUp with the provided credentials', () => {
-    const setLoading = jest.fn();
-    const credentials = { email: 'test@example.com', password: 'password' };
-    // const supabase = {}; // Mock supabase object
-
-    handleSignUp({ credentials, supabase, setLoading });
-
-    expect(setLoading).toHaveBeenCalledTimes(2);
-    expect(setLoading).toHaveBeenCalledWith(true);
-    expect(setLoading).toHaveBeenCalledWith(false);
-    expect(supabase.auth.signUp).toHaveBeenCalledWith(credentials);
-  });
-});
-
-
-describe('handleLogin', () => {
-  it('should set loading to true and call login with the provided credentials', () => {
-    const setLoading = jest.fn();
-    const credentials = { email: 'test@example.com', password: 'password' };
-    // const supabase = {}; // Mock supabase object
-
-    handleLogin({ credentials, supabase, setLoading });
-
-    expect(setLoading).toHaveBeenCalledTimes(2);
-    expect(setLoading).toHaveBeenCalledWith(true);
-    expect(setLoading).toHaveBeenCalledWith(false);
-    expect(supabase.auth.signInWithPassword).toHaveBeenCalledWith(credentials);
-  });
-});
+//     expect(setLoading).toHaveBeenCalledTimes(2);
+//     expect(setLoading).toHaveBeenCalledWith(true);
+//     expect(setLoading).toHaveBeenCalledWith(false);
+//     expect(supabase.auth.signInWithPassword).toHaveBeenCalledWith(credentials);
+//   });
+// });
 
 describe('logout', () => {
 

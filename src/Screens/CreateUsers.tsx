@@ -10,6 +10,7 @@ import {
 import { FIREBASE_APP, FIREBASE_AUTH, FIRESTORE_DB } from '../../firebaseConfig';
 
 import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { BTextInput } from '../Components/Styles';
 
 
 export const CreateUsers = () => {
@@ -57,11 +58,17 @@ const addUserDoc = async () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
-        <TextInput
+      <BTextInput
+                label={"Password"}
+                secureTextEntry={true}
+                // value={password}
+                placeholder='Your post...'
+                onChangeText={value => handleChangeText('name', value)}
+                />
+        {/* <TextInput
           placeholder="UserName"
           style={styles.input}
-          onChangeText={value => handleChangeText('name', value)}
-        />
+        /> */}
       </View>
       <View style={styles.inputGroup}>
         <TextInput

@@ -12,8 +12,8 @@ interface PorpsBaseButton {
 
 export const BaseButton = ({ title, className, onPress, classNameContainer }: PorpsBaseButton) => {
   return (
-    <TouchableOpacity onPress={onPress} className={`bg-slate-600 rounded-md items-center justify-center ${classNameContainer}`} >
-        <Text className={`text-slate-100 py-4 ${className}`}>{title}</Text>
+    <TouchableOpacity onPress={()=>onPress()} className={`bg-slate-600 rounded-md items-center justify-center my-4 ${classNameContainer}`} >
+        <Text className={`dark:text-white py-4 ${className}`}>{title}</Text>
     </TouchableOpacity>
   )
 }
