@@ -5,6 +5,7 @@ import { useAppSelector } from "../Store/hooks"
 import { SupraExample } from '../Screens/SupaExample/SupraExample'
 import { SimpleLoading } from '../Screens/Loadings/SimpleLoading'
 import { Login } from '../Screens/Auth'
+import { StartupContainer } from '../Screens/StartupContainer'
 
 const Stack = createNativeStackNavigator()
 
@@ -36,9 +37,10 @@ export function MyStack(){
     >
      
      { userInfo.session ? 
-     <Stack.Screen name='SupraExample' component={SupraExample} />
+     <Stack.Screen name='StartupContainer' component={StartupContainer} />
      : isLoading ? <Stack.Screen name='SimpleLoading' component={SimpleLoading}/> :<Stack.Screen name='Login' component={Login} />
      }
+     <Stack.Screen name='SupraExample' component={SupraExample} />
 
       
     </Stack.Navigator>

@@ -6,7 +6,7 @@ export const Settings = ({navigation}: any) => {
         <View>
             <Text>Settings</Text>
             
-            <Logout navigation={navigation}/>
+                <Logout navigation={navigation}/>
             
             </View>
     )

@@ -16,6 +16,8 @@ import {
 } from 'redux-persist'
 import counterSlice from './slices/counterSlice'
 import  authSlice  from './slices/authSlice'
+import postsSlice from './slices/postsSlice'
+import themeSlice from './slices/themeSlice'
 
 
 
@@ -23,12 +25,14 @@ import  authSlice  from './slices/authSlice'
 const reducers = combineReducers({
     counter: counterSlice,
     auth: authSlice,
+    posts: postsSlice,
+    theme: themeSlice
 })
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth'],
+  whitelist: ['theme'],
   debug: true,
 }
 
