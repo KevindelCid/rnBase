@@ -11,6 +11,14 @@ import { useAppSelector } from '../../Store/hooks';
 import { useDispatch } from 'react-redux';
 import { addPost, setPosts } from '../../Store/slices/postsSlice';
 import { Database } from '../../db_types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ParamListBase } from '@react-navigation/native';
+
+
+
+interface SupraExampleProps {
+    navigation: NativeStackNavigationProp<ParamListBase, string, undefined>
+}
 
 export const handleSubmit = async (content: string, posts: any[] | null, addPost: any, setPosts: any) => {
     const { data, error } = await supabase.from('posts').insert({ content }).select()
@@ -27,7 +35,7 @@ export const handleSubmit = async (content: string, posts: any[] | null, addPost
 
 
 
-export const SupraExample: React.FC = () => {
+export const SupraExample= ({ navigation }: SupraExampleProps) => {
 
     // const [posts, setPosts] = useState<Posts>([]);
     const [content, setContent] = useState<string>("")
@@ -68,11 +76,10 @@ export const SupraExample: React.FC = () => {
 
                 </View>
 
-                        <BaseDarkModeButton/>
             </SimpleContainer>
-            <BView className={"absolute bottom-1 right-0 left-0 flex-1"}>
-                <Logout className={""} />
-            </BView>
+            {/* <BView className={"absolute bottom-1 right-0 left-0 flex-1"}>
+                <Logout className={""} navigation={navigation} />
+            </BView> */}
         </>
     );
 }

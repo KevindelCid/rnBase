@@ -29,10 +29,11 @@ export const Login = () => {
 
     const [mode, setMode] = useState<'login' | 'signUp'>('login')
     const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('kevindelcid731@gmail.com')
+    const [password, setPassword] = useState('relojdepared')
     const [loading, setLoading] = useState(false)
     const [emailConfirmation, setEmailConfirmation] = useState(false)
+    const [limitExceeded, setLimitExceeded] = useState(false)
     const [error, setError] = useState(false)
 
     return (
@@ -47,11 +48,22 @@ export const Login = () => {
                 />
             </BModal>
 
+            <BModal modalVisible={limitExceeded} setModalVisible={setLimitExceeded} >
+                <BXLTitleText>Limit exceeded</BXLTitleText>
+                <BText>Email rate limit exceeded</BText>
+                <BaseButton
+                    title='I catch it'
+                    onPress={() => setLimitExceeded(false)}
+                />
+            </BModal>
+
+
+
             <View className="flex-row justify-between pb-4">
                 <BXLTitleText>
                     Login
                 </BXLTitleText>
-                <BaseDarkModeButton />
+                <BaseDarkModeButton label={false} />
             </View>
 
             <BTextInput
@@ -72,7 +84,7 @@ export const Login = () => {
 
             {loading ? <ActivityIndicator size="large" color="#0000ff" />
                 : <View className="my-4 flex-row " style={{ gap: 4 }}>
-                    <BaseButton classNameContainer='flex-1' title="Get start" onPress={() => handleSignUp({ credentials: { email, password }, setLoading, setEmailConfirmation, setError, supabase })} />
+                    <BaseButton classNameContainer='flex-1' title="Get start" onPress={() => handleSignUp({ credentials: { email, password }, setLoading, setEmailConfirmation, setLimitExceeded, setError, supabase })} />
                     {/* <BaseButton classNameContainer='flex-1' title="Login" onPress={() => handleLogin({ credentials: { email, password }, setLoading, supabase })} /> */}
                 </View>
             }

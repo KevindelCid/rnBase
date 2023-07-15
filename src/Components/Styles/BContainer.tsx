@@ -13,6 +13,8 @@ const baseThemeContainerBg = "bg-slate-200 dark:bg-slate-800 p-4"
 
 
 export const BView = styled(View, baseThemeContainerBg);
+export const BCenterView = styled(View, `${baseThemeContainerBg} items-center justify-center`);
+export const BBetweenView = styled(View, `${baseThemeContainerBg} items-center justify-between`);
 export const BScrollView = styled(ScrollView, baseThemeContainerBg);
 // export const BStyleModal = styled(Modal, baseThemeContainerBg);
 

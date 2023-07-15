@@ -7,16 +7,17 @@ import { useDispatch } from 'react-redux';
 import { setTheme } from '../../Store/slices/themeSlice';
 import { useAppSelector } from '../../Store/hooks';
 import { ActionCreatorWithPayload, AnyAction, Dispatch } from '@reduxjs/toolkit';
+import { BBetweenView, BText } from '../Styles';
 
 interface PropsSelectTheme {
-  theme: 'light' | 'dark' | 'system', 
-  dispatch: Dispatch<AnyAction>, 
-  setTheme: ActionCreatorWithPayload<any, "theme/setTheme">, 
+  theme: 'light' | 'dark' | 'system',
+  dispatch: Dispatch<AnyAction>,
+  setTheme: ActionCreatorWithPayload<any, "theme/setTheme">,
   setColorScheme: any
 }
 
 
-export const selectTheme = ({theme, dispatch, setTheme, setColorScheme}: PropsSelectTheme) => {
+export const selectTheme = ({ theme, dispatch, setTheme, setColorScheme }: PropsSelectTheme) => {
   if (theme === 'light') {
     dispatch(setTheme('dark'))
     setColorScheme('dark')
@@ -28,18 +29,28 @@ export const selectTheme = ({theme, dispatch, setTheme, setColorScheme}: PropsSe
 }
 
 
-export const BaseDarkModeButton = () => {
+interface BaseDarkModeButtonProps {
+  label: boolean
+}
+
+export const BaseDarkModeButton = ({ label }: BaseDarkModeButtonProps) => {
 
   const dispatch = useDispatch()
   const theme = useAppSelector(state => state.theme.theme)
   const { colorScheme, setColorScheme } = useColorScheme();
+  const stylesWithLabel = `w-full border-b-[1px] border-slate-300 dark:border-slate-700`
+
 
   return (
     <TouchableOpacity
-      onPress={() => selectTheme({theme, dispatch, setTheme, setColorScheme})}
-      className=" dark:bg-slate-800 w-10"
+      onPress={() => selectTheme({ theme, dispatch, setTheme, setColorScheme })}
+      className={` dark:bg-slate-800  ${label ? stylesWithLabel : "w-10"}`}
     >
-      {colorScheme === "dark" ? Icons("entypo", "moon", "white") : Icons("feather", "sun", "black")}
+      {label ? <BBetweenView className='flex-row'>
+        <BText>Change theme</BText>
+        {colorScheme === "dark" ? Icons("entypo", "moon") : Icons("feather", "sun")}
+      </BBetweenView> : colorScheme === "dark" ? Icons("entypo", "moon") : Icons("feather", "sun")}
+
     </TouchableOpacity>
   )
 }

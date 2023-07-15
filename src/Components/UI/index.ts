@@ -1,3 +1,4 @@
+export * from './BButtonIcon';
 export * from './BaseAuthButton';
 export * from './BaseButton';
 export * from './BaseDarkModeButton';

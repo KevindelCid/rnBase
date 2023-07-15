@@ -6,6 +6,7 @@ export interface PropsHandleSignUp {
     supabase: any
     setEmailConfirmation: React.Dispatch<React.SetStateAction<boolean>>
     setError: React.Dispatch<React.SetStateAction<boolean>>
+    setLimitExceeded: React.Dispatch<React.SetStateAction<boolean>>
     // setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 export interface PropsHandleLogin {
@@ -18,18 +19,24 @@ export interface PropsHandleLogin {
 
 
 
-export const signUp = async ({ credentials, supabase, setEmailConfirmation, setError }: PropsHandleSignUp) => {
+export const signUp = async ({ credentials, supabase, setEmailConfirmation, setError, setLimitExceeded }: PropsHandleSignUp) => {
 
     if (!('email' in credentials)) return { ok: false, message: "Email is required." }
 
   
     const { email, password } = credentials
     const { error, data } = await supabase.auth.signUp({ email, password })
-    console.log("🚀 ~ file: auth.ts:19 ~ signUp ~ data:", data, JSON.stringify(error))
+    const errorStatus = error?.status === 429
+ 
 
-    if (error) {
+    if (error) {  
+        if(errorStatus){
+            setLimitExceeded(true)
+          }
         return { ok: false, message: "signup error." }
+      
     }
+   
     else {
 
        const {error} = await login({credentials, supabase})
@@ -38,6 +45,7 @@ export const signUp = async ({ credentials, supabase, setEmailConfirmation, setE
        if(error?.message === "Email not confirmed"){
          setEmailConfirmation(true)
        }
+       
        if(error?.message === "Invalid login credentials"){
         setError(true)
       }
@@ -74,7 +82,11 @@ export const login = async ({ credentials, supabase }: PropsHandleLogin) => {
 export const logout = async ({ navigation, supabase }: any) => {
 
        const { error, data } = await supabase.auth.signOut()
-        navigation?.navigate('Login')
+       navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+        
         if(error)
         return { ok: false }
         return { ok: true }

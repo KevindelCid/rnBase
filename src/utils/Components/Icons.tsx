@@ -6,6 +6,7 @@ import AntDesign from 'react-native-vector-icons/dist/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import Entypo from 'react-native-vector-icons/dist/Entypo'
+import { useColorScheme } from 'nativewind'
 
 
 interface IconsProps {
@@ -15,15 +16,22 @@ interface IconsProps {
     size: number
 }
 
-export const Icons = (iconSource: string, iconName: string, color = 'primary', size = 20.5) => {
 
+
+
+export const Icons = (iconSource: string, iconName: string) => {
+
+
+  const { colorScheme, setColorScheme } = useColorScheme();
+
+  const color = colorScheme === 'light' ? 'black' : "white" 
     switch (iconSource) {
       case 'ionicons':
         return (
           <Ionicons
             name={iconName}
             size={30}
-            color={color ? color : "black"}
+            color={color}
           />
         )
       case 'feather':
@@ -31,7 +39,7 @@ export const Icons = (iconSource: string, iconName: string, color = 'primary', s
           <FeatherIcon
             name={iconName}
             size={30}
-            color={color ? color : "black"}
+            color={color}
           />
         )
   
@@ -40,7 +48,7 @@ export const Icons = (iconSource: string, iconName: string, color = 'primary', s
           <AntDesign
             name={iconName}
             size={30}
-            color={color ? color : "black"}
+            color={color}
           />
         )
   
@@ -49,7 +57,7 @@ export const Icons = (iconSource: string, iconName: string, color = 'primary', s
           <MaterialCommunityIcons
             name={iconName}
             size={30}
-            color={color ? color : "black"}
+            color={color}
           />
         )
       case 'entypo':
@@ -57,7 +65,7 @@ export const Icons = (iconSource: string, iconName: string, color = 'primary', s
           <Entypo
             name={iconName}
             size={30}
-            color={color ? color : "black"}
+            color={color}
           />
         )
       default:
